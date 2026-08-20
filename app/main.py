@@ -5,7 +5,8 @@ main.py - Flask 应用入口
 职责：创建 app、注册路由、启动服务（不写业务逻辑）
 
 运行方式（项目根目录）：
-  python app/main.py
+  python -m app.main
+（注意：用 -m 模块方式运行，直接 python app/main.py 会报 No module named 'app'）
 """
 from pathlib import Path
 
