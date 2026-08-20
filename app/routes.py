@@ -64,7 +64,8 @@ def chat():
 
     try:
         hits = retrieve(store, question, top_k=TOP_K)          # ① 检索
-        answer = ask(question, [h["text"] for h in hits])      # ② 生成
+        history = data.get("history") or []                    # 多轮对话上下文
+        answer = ask(question, [h["text"] for h in hits], history)  # ② 生成
         _history.append({"question": question, "answer": answer})
         return jsonify({
             "answer": answer,

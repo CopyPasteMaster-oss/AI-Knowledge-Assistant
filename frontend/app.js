@@ -38,17 +38,40 @@ async function sendQuestion() {
   $("questionInput").value = "";
   addMessage("bot", "🤔 思考中...");
 
+  // 收集最近几轮对话历史（多轮上下文）
+  const history = [];
+  const msgs = $("messages").querySelectorAll(".message");
+  for (const m of msgs) {
+    const text = m.textContent.replace(/📎 依据来源：.*$/s, "").trim();
+    if (!text) continue;
+    history.push(m.classList.contains("user")
+      ? { question: text }
+      : { answer: text });
+  }
+
   try {
     const resp = await fetch("/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ question }),
+      body: JSON.stringify({ question, history: history.slice(-6) }),
     });
     const data = await resp.json();
-    updateLastBot(data.answer || `❌ ${data.error}`);
+    renderBotAnswer(data);
   } catch (e) {
     updateLastBot("❌ 请求失败，请确认服务已启动");
   }
+}
+
+function renderBotAnswer(data) {
+  const msg = $("messages").lastElementChild;
+  msg.textContent = data.answer || `❌ ${data.error}`;
+  if (data.sources && data.sources.length) {
+    const src = document.createElement("div");
+    src.className = "sources";
+    src.textContent = "📎 依据来源：" + data.sources.map((s) => s.text).join(" ｜ ");
+    msg.appendChild(src);
+  }
+  $("messages").scrollTop = $("messages").scrollHeight;
 }
 
 // ---------- 消息渲染 ----------

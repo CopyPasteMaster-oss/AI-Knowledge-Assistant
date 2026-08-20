@@ -46,6 +46,12 @@ button:disabled { background: #ccc; cursor: not-allowed; }
 .message.user { background: #1a73e8; color: #fff; margin-left: auto; }
 .message.bot { background: #fff; border: 1px solid #e5e5e5; }
 
+.sources {
+  margin-top: 8px; padding-top: 6px;
+  border-top: 1px dashed #ddd;
+  font-size: 12px; color: #999;
+}
+
 .input-row { display: flex; gap: 10px; }
 .input-row input {
   flex: 1; padding: 12px; border: 1px solid #ddd;

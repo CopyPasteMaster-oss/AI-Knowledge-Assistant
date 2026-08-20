@@ -34,15 +34,20 @@ def _load_api_key() -> str:
     raise RuntimeError(".env 中缺少 DEEPSEEK_API_KEY，请检查项目根目录 .env 文件")
 
 
-def build_user_prompt(question: str, contexts: list) -> str:
-    """组装 user prompt：参考资料 + 问题（RAG 的核心拼接逻辑）"""
+def build_user_prompt(question: str, contexts: list, history: list = None) -> str:
+    """组装 user prompt：对话历史（可选）+ 参考资料 + 问题"""
     refs = "\n\n".join(f"[{i + 1}] {c}" for i, c in enumerate(contexts))
-    return f"参考资料：\n{refs}\n\n问题：{question}"
+    hist_text = ""
+    if history:
+        lines = [f"用户：{h['question']}\n助手：{h['answer']}"
+                 for h in history[-4:]]  # 只带最近 4 轮，避免上下文过长
+        hist_text = "对话历史：\n" + "\n".join(lines) + "\n\n"
+    return f"{hist_text}参考资料：\n{refs}\n\n问题：{question}"
 
 
-def ask(question: str, contexts: list) -> str:
-    """RAG 问答：给定问题和检索到的资料片段，返回模型回答"""
-    user_prompt = build_user_prompt(question, contexts)
+def ask(question: str, contexts: list, history: list = None) -> str:
+    """RAG 问答：给定问题、检索资料、可选对话历史，返回模型回答"""
+    user_prompt = build_user_prompt(question, contexts, history)
     resp = requests.post(
         API_URL,
         headers={"Authorization": f"Bearer {_load_api_key()}"},
