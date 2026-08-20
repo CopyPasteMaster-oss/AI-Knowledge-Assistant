@@ -22,10 +22,12 @@ AI-Knowledge-Assistant/
 ## 🚧 开发状态
 
 - [x] Stage 1：项目初始化（目录结构 + 本 README）
-- [ ] Stage 2：文档处理（PDF 解析 + 文本切片）
-- [ ] Stage 3：Embedding（BGE 文本向量化）
+- [x] Stage 2：文档处理（PDF/TXT/MD/Word 解析 + 文本切片）✅ `core/document_loader.py` `core/splitter.py`
+- [x] Stage 3：Embedding（BGE 中文模型文本向量化）✅ `core/embedding.py`
 - [ ] Stage 4：FAISS 知识库（向量存储 + 相似度检索）
 - [ ] Stage 5：RAG 流程（Retriever + Prompt + DeepSeek 调用）
 - [ ] Stage 6：Flask 接口（上传 API + 问答 API）
 - [ ] Stage 7：Web 页面（聊天 + 上传）
 - [ ] Stage 8：项目优化（引用来源 / 多轮对话 / 流式输出）
+
+> 模型文件（BGE）不入库：clone 后按 README 说明下载，或使用 `models/bge-small-zh-v1.5` 本地路径。
