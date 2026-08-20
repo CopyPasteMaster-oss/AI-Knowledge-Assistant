@@ -24,7 +24,7 @@ AI-Knowledge-Assistant/
 - [x] Stage 1：项目初始化（目录结构 + 本 README）
 - [x] Stage 2：文档处理（PDF/TXT/MD/Word 解析 + 文本切片）✅ `core/document_loader.py` `core/splitter.py`
 - [x] Stage 3：Embedding（BGE 中文模型文本向量化）✅ `core/embedding.py`
-- [ ] Stage 4：FAISS 知识库（向量存储 + 相似度检索）
+- [x] Stage 4：FAISS 知识库（向量存储 + Top-K 相似度检索）✅ `core/vector_store.py`
 - [ ] Stage 5：RAG 流程（Retriever + Prompt + DeepSeek 调用）
 - [ ] Stage 6：Flask 接口（上传 API + 问答 API）
 - [ ] Stage 7：Web 页面（聊天 + 上传）
