@@ -39,7 +39,7 @@ def build_user_prompt(question: str, contexts: list, history: list = None) -> st
     refs = "\n\n".join(f"[{i + 1}] {c}" for i, c in enumerate(contexts))
     hist_text = ""
     if history:
-        lines = [f"用户：{h['question']}\n助手：{h['answer']}"
+        lines = [f"用户：{h.get('question', '')}\n助手：{h.get('answer', '')}"
                  for h in history[-4:]]  # 只带最近 4 轮，避免上下文过长
         hist_text = "对话历史：\n" + "\n".join(lines) + "\n\n"
     return f"{hist_text}参考资料：\n{refs}\n\n问题：{question}"
