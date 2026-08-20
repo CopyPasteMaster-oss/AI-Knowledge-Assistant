@@ -9,6 +9,9 @@ vector_store.py - FAISS 向量库模块
 2. documents 列表与向量一一对应（向量 id -> 原文），检索结果可直接返回文本
 3. 支持持久化：save/load 到 data/vector_db/
 """
+import json
+from pathlib import Path
+
 import faiss
 import numpy as np
 
@@ -58,12 +61,22 @@ class VectorStore:
         return results
 
     def save(self, path: str) -> None:
-        """保存索引到文件（FAISS 格式 .faiss）"""
+        """保存索引到文件（FAISS 格式 .faiss）+ 文本列表（JSON，与向量一一对应）"""
         faiss.write_index(self.index, path)
+        docs_path = Path(path).with_suffix(".documents.json")
+        docs_path.write_text(
+            json.dumps(self.documents, ensure_ascii=False, indent=2),
+            encoding="utf-8",
+        )
 
     def load(self, path: str) -> None:
-        """从文件加载索引（documents 由调用方按相同顺序恢复）"""
+        """从文件加载索引 + 文本列表（与向量一一对应）"""
         self.index = faiss.read_index(path)
+        docs_path = Path(path).with_suffix(".documents.json")
+        if docs_path.exists():
+            self.documents = json.loads(docs_path.read_text(encoding="utf-8"))
+        elif self.index.ntotal > 0:
+            print(f"[警告] 索引有 {self.index.ntotal} 个向量，但缺少文本列表文件，检索可能不完整")
 
     def __len__(self):
         return self.index.ntotal
