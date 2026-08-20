@@ -1,0 +1,26 @@
+# ===== Python 缓存 =====
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# ===== 虚拟环境（几百MB，绝对不传）=====
+.venv/
+venv/
+env/
+
+# ===== 数据文件（文档/向量库，训练后可重新生成）=====
+data/documents/*
+data/vector_db/*
+!data/documents/.gitkeep
+!data/vector_db/.gitkeep
+
+# ===== 密钥与配置 =====
+.env
+*.key
+config.local.json
+
+# ===== 系统/编辑器杂项 =====
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
