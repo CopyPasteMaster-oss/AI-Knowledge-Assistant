@@ -14,6 +14,9 @@ data/vector_db/*
 !data/documents/.gitkeep
 !data/vector_db/.gitkeep
 
+# ===== 模型文件（几百MB，clone 后按 README 下载）=====
+models/
+
 # ===== 密钥与配置 =====
 .env
 *.key
