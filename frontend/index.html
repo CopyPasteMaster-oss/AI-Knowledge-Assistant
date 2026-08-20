@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 知识库助手</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>📚 AI 知识库助手</h1>
+      <p>上传企业文档，基于 RAG 的智能问答</p>
+    </header>
+
+    <section class="upload-box">
+      <h2>📤 上传文档</h2>
+      <div class="upload-row">
+        <input type="file" id="fileInput" accept=".pdf,.txt,.md,.docx,.doc">
+        <button id="uploadBtn">上传入库</button>
+      </div>
+      <p id="uploadMsg" class="msg"></p>
+    </section>
+
+    <section class="chat-box">
+      <h2>💬 提问</h2>
+      <div id="messages" class="messages"></div>
+      <div class="input-row">
+        <input type="text" id="questionInput" placeholder="输入问题，例如：迟到怎么处罚？">
+        <button id="sendBtn">发送</button>
+      </div>
+    </section>
+  </div>
+  <script src="/static/app.js"></script>
+</body>
+</html>

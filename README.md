@@ -27,7 +27,7 @@ AI-Knowledge-Assistant/
 - [x] Stage 4：FAISS 知识库（向量存储 + Top-K 相似度检索）✅ `core/vector_store.py`
 - [x] Stage 5：RAG 流程（Retriever + Prompt + DeepSeek 调用）✅ `core/retriever.py` `core/llm.py`
 - [x] Stage 6：Flask 接口（上传 API + 问答 API + 历史）✅ `app/main.py` `app/routes.py` `app/config.py`
-- [ ] Stage 7：Web 页面（聊天 + 上传）
+- [x] Stage 7：Web 页面（聊天 + 上传）✅ `frontend/index.html` `style.css` `app.js`
 - [ ] Stage 8：项目优化（引用来源 / 多轮对话 / 流式输出）
 
 > 模型文件（BGE）不入库：clone 后按 README 说明下载，或使用 `models/bge-small-zh-v1.5` 本地路径。

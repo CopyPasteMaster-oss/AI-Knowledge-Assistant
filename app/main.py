@@ -7,6 +7,8 @@ main.py - Flask 应用入口
 运行方式（项目根目录）：
   python app/main.py
 """
+from pathlib import Path
+
 from flask import Flask
 
 from app.config import HOST, PORT, FAISS_INDEX_PATH
@@ -14,9 +16,16 @@ from app.routes import bp, store
 
 
 def create_app() -> Flask:
-    """应用工厂：创建并配置 Flask 实例"""
-    app = Flask(__name__)
+    """应用工厂：创建并配置 Flask 实例（前端页面在 frontend/ 目录）"""
+    frontend_dir = Path(__file__).resolve().parent.parent / "frontend"
+    app = Flask(__name__, static_folder=str(frontend_dir), static_url_path="/static")
     app.register_blueprint(bp)
+
+    @app.route("/")
+    def index():
+        """根路径返回前端聊天页面"""
+        return app.send_static_file("index.html")
+
     return app
 
 

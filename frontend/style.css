@@ -1,0 +1,54 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  background: #f0f2f5;
+  color: #333;
+  min-height: 100vh;
+}
+
+.container { max-width: 720px; margin: 0 auto; padding: 24px 16px; }
+
+header { text-align: center; margin-bottom: 24px; }
+header h1 { font-size: 28px; color: #1a73e8; }
+header p { color: #888; margin-top: 4px; }
+
+section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 4px rgba(0,0,0,.08);
+}
+section h2 { font-size: 16px; margin-bottom: 12px; color: #444; }
+
+.upload-row { display: flex; gap: 10px; align-items: center; }
+input[type="file"] { flex: 1; font-size: 14px; }
+
+button {
+  background: #1a73e8; color: #fff;
+  border: none; border-radius: 8px;
+  padding: 10px 18px; font-size: 14px; cursor: pointer;
+}
+button:hover { background: #1557b0; }
+button:disabled { background: #ccc; cursor: not-allowed; }
+
+.msg { margin-top: 10px; font-size: 13px; color: #1a73e8; }
+
+.messages {
+  height: 320px; overflow-y: auto;
+  border: 1px solid #eee; border-radius: 8px;
+  padding: 12px; margin-bottom: 12px;
+  background: #fafafa;
+}
+
+.message { margin-bottom: 10px; padding: 10px 14px; border-radius: 10px; max-width: 85%; white-space: pre-wrap; word-break: break-word; }
+.message.user { background: #1a73e8; color: #fff; margin-left: auto; }
+.message.bot { background: #fff; border: 1px solid #e5e5e5; }
+
+.input-row { display: flex; gap: 10px; }
+.input-row input {
+  flex: 1; padding: 12px; border: 1px solid #ddd;
+  border-radius: 8px; font-size: 14px;
+}
+.input-row input:focus { outline: none; border-color: #1a73e8; }
