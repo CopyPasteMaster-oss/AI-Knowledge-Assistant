@@ -58,9 +58,11 @@ def upload():
 def chat():
     """问答：检索最相关片段 → DeepSeek 生成回答"""
     data = request.get_json(silent=True) or {}
-    question = (data.get("question") or "").strip()
+    question = str(data.get("question") or "").strip()
     if not question:
         return jsonify({"error": "缺少字段 'question'"}), 400
+    if len(store) == 0:
+        return jsonify({"error": "知识库还没有内容，请先上传文档再提问"}), 400
 
     try:
         hits = retrieve(store, question, top_k=TOP_K)          # ① 检索
@@ -72,7 +74,7 @@ def chat():
             "sources": [{"score": round(h["score"], 3), "text": h["text"][:100]} for h in hits],
         })
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return jsonify({"error": f"抱歉，服务开小差了：{type(e).__name__}，请稍后再试"}), 500
 
 
 @bp.get("/history")
